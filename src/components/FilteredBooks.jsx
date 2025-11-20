@@ -31,7 +31,7 @@ class FilteredBooks extends Component {
                   return b.title.toLowerCase().includes(this.state.inputString);
                 })
                 .map((book) => (
-                  <Col key={book.asin} xs={12} md={4} lg={2}>
+                  <Col key={book.asin} xs={12} md={4}>
                     <SingleBook book={book} />
                   </Col>
                 ))}
