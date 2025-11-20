@@ -37,40 +37,48 @@ class AddComment extends Component {
         });
       }
     } catch (e) {
-      console.log(e);
+      alert('error data saving', e);
     }
   };
 
   render() {
-    const { review } = this.state;
     return (
       <>
         <h3 className="mt-3">Add a comment</h3>
         <Form onSubmit={this.saveData}>
-          <Form.Group className="mb-1" controlId="exampleForm.ControlInput1">
-            <Form.Control
-              value={review.rate}
-              type="number"
-              placeholder="Rate number"
-              onChange={(e) =>
-                this.setState({
-                  review: { ...review, rate: e.target.value }
-                })
-              }
-            />
-          </Form.Group>
+          <Form.Group
+            className="mb-1"
+            controlId="exampleForm.ControlInput1"
+          ></Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Control
               as="textarea"
               rows={3}
-              value={review.comment}
+              value={this.state.review.comment}
               placeholder="Insert your comment here"
               onChange={(e) =>
                 this.setState({
-                  review: { ...review, comment: e.target.value }
+                  review: { ...this.state.review, comment: e.target.value }
                 })
               }
+              required
             />
+            <Form.Select
+              aria-label="Default select example"
+              value={this.state.review.rate}
+              onChange={(e) =>
+                this.setState({
+                  review: { ...this.state.review, rate: e.target.value }
+                })
+              }
+              required
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="3">4</option>
+              <option value="3">5</option>
+            </Form.Select>
             <Button type="submit">Publish</Button>
           </Form.Group>
         </Form>
