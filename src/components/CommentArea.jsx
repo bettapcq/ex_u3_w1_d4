@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import CommentsList from './CommentsList';
 import AddComment from './AddComment';
 
@@ -57,6 +57,7 @@ class CommentArea extends Component {
         <Row className="justify-content-center">
           <Col>
             <h3>Book Reviews</h3>
+            {this.state.loading && <Spinner animation="grow" />}
           </Col>
         </Row>
         <Row>
@@ -65,7 +66,7 @@ class CommentArea extends Component {
           </Col>
         </Row>
         <Row>
-          <AddComment id={this.state.idBook}/>
+          <AddComment id={this.state.idBook} />
         </Row>
       </Container>
     );
@@ -73,7 +74,6 @@ class CommentArea extends Component {
 }
 
 export default CommentArea;
-
 
 // da aggiungere
 // {

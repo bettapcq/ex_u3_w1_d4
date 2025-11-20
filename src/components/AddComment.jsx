@@ -6,14 +6,15 @@ class AddComment extends Component {
   state = {
     review: {
       comment: '',
-      rate: 0
+      rate: '',
+      elementId: ''
     }
   };
 
-  saveData = async (event) => {
-    if (event && event.preventDefault) event.preventDefault();
-    const URL = 'https://striveschool.herokuapp.com/api/comments/';
+  saveData = async () => {
+    const URL = 'https://striveschool-api.herokuapp.com/api/comments/';
     const urlId = this.props.id;
+    console.log(urlId);
 
     try {
       const response = await fetch(URL + urlId, {
@@ -27,6 +28,13 @@ class AddComment extends Component {
       });
       if (response.ok) {
         alert('data saved successfully');
+        this.setState({
+          review: {
+            comment: '',
+            rate: '',
+            elementId: ''
+          }
+        });
       }
     } catch (e) {
       console.log(e);
@@ -34,18 +42,34 @@ class AddComment extends Component {
   };
 
   render() {
+    const { review } = this.state;
     return (
       <>
         <h3 className="mt-3">Add a comment</h3>
         <Form onSubmit={this.saveData}>
           <Form.Group className="mb-1" controlId="exampleForm.ControlInput1">
-            <Form.Control type="number" placeholder="Rate number" />
+            <Form.Control
+              value={review.rate}
+              type="number"
+              placeholder="Rate number"
+              onChange={(e) =>
+                this.setState({
+                  review: { ...review, rate: e.target.value }
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Control
               as="textarea"
               rows={3}
+              value={review.comment}
               placeholder="Insert your comment here"
+              onChange={(e) =>
+                this.setState({
+                  review: { ...review, comment: e.target.value }
+                })
+              }
             />
             <Button type="submit">Publish</Button>
           </Form.Group>
