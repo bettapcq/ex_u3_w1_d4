@@ -7,7 +7,8 @@ class CommentArea extends Component {
   state = {
     comments: [],
     loading: true,
-    error: false
+    error: false,
+    idBook: ''
   };
 
   getComments = () => {
@@ -33,7 +34,8 @@ class CommentArea extends Component {
 
         this.setState({
           comments: commentsArray,
-          loading: false
+          loading: false,
+          idBook: bookId
         });
       })
       .catch((err) => {
@@ -63,7 +65,7 @@ class CommentArea extends Component {
           </Col>
         </Row>
         <Row>
-          <AddComment />
+          <AddComment id={this.state.idBook}/>
         </Row>
       </Container>
     );
