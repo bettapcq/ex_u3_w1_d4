@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 // import AllTheBooks from './components/AllTheBooks';
 import Welcome from './components/Welcome';
 import BooksList from './components/BooksList';
+import { Container, Row } from 'react-bootstrap';
 
 function App() {
   return (
@@ -11,7 +12,11 @@ function App() {
       <MyNav></MyNav>
       <Welcome></Welcome>
       {/* <AllTheBooks></AllTheBooks> */}
-      <BooksList></BooksList>
+      <Container>
+        <Row className="flex-column">
+          <BooksList />
+        </Row>
+      </Container>
       <Footer></Footer>
     </>
   );

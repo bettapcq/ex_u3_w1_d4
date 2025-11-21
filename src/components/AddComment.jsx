@@ -6,18 +6,16 @@ class AddComment extends Component {
   state = {
     review: {
       comment: '',
-      rate: '',
-      elementId: ''
+      rate: '5',
+      elementId: this.props.asin
     }
   };
 
   saveData = async () => {
     const URL = 'https://striveschool-api.herokuapp.com/api/comments/';
-    const urlId = this.props.id;
-    console.log(urlId);
 
     try {
-      const response = await fetch(URL + urlId, {
+      const response = await fetch(URL, {
         method: 'POST',
         body: JSON.stringify(this.state.review),
         headers: {
@@ -31,8 +29,7 @@ class AddComment extends Component {
         this.setState({
           review: {
             comment: '',
-            rate: '',
-            elementId: ''
+            rate: '5'
           }
         });
       }
@@ -41,11 +38,17 @@ class AddComment extends Component {
     }
   };
 
+
   render() {
     return (
       <>
         <h3 className="mt-3">Add a comment</h3>
-        <Form onSubmit={this.saveData}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.saveData();
+          }}
+        >
           <Form.Group
             className="mb-1"
             controlId="exampleForm.ControlInput1"
@@ -76,8 +79,8 @@ class AddComment extends Component {
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
-              <option value="3">4</option>
-              <option value="3">5</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
             </Form.Select>
             <Button type="submit">Publish</Button>
           </Form.Group>

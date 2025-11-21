@@ -8,14 +8,13 @@ class CommentArea extends Component {
     comments: [],
     loading: true,
     error: false,
-    idBook: ''
+    bookAsin: this.props.asin
   };
 
   getComments = () => {
     const URL = 'https://striveschool-api.herokuapp.com/api/comments/';
-    const bookId = this.props.asin;
 
-    fetch(URL + bookId, {
+    fetch(URL + this.state.bookAsin, {
       headers: {
         Authorization:
           'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTFmMGVkNzIzZTc0MDAwMTVmN2ZkYjkiLCJpYXQiOjE3NjM2NDMwOTUsImV4cCI6MTc2NDg1MjY5NX0.REy03d-jT7KnlSs2hgEzmFhxfLbWzagIFRKUqUZUpeA'
@@ -34,8 +33,7 @@ class CommentArea extends Component {
 
         this.setState({
           comments: commentsArray,
-          loading: false,
-          idBook: bookId
+          loading: false
         });
       })
       .catch((err) => {
@@ -66,7 +64,7 @@ class CommentArea extends Component {
           </Col>
         </Row>
         <Row>
-          <AddComment id={this.state.idBook} />
+          <AddComment asin={this.state.bookAsin} />
         </Row>
       </Container>
     );
